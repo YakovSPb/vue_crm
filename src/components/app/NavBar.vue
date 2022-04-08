@@ -42,7 +42,7 @@
 <script>
 export default {
   data: () => ({
-    date: new Date(),
+    date: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString(),
     interval: null,
     dropdown: null,
   }),
