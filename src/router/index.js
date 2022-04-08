@@ -1,65 +1,65 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    meta: {layout: 'main'},
-    component: () => import('../views/Home.vue')
+    path: "/login",
+    name: "login",
+    meta: { layout: "empty" },
+    component: () => import("../views/Login.vue"),
   },
   {
-    path: '/login',
-    name: 'login',
-    meta: {layout: 'empty'},
-    component: () => import('../views/Login.vue')
+    path: "/register",
+    name: "register",
+    meta: { layout: "empty" },
+    component: () => import("../views/Register.vue"),
   },
   {
-    path: '/categories',
-    name: 'categories',
-    meta: {layout: 'main'},
-    component: () => import('../views/Catergories.vue')
+    path: "/",
+    name: "home",
+    meta: { layout: "main" },
+    component: () => import("../views/Home.vue"),
   },
   {
-    path: '/detail',
-    name: 'detail',
-    meta: {layout: 'main'},
-    component: () => import('../views/DedailRecord.vue')
+    path: "/categories",
+    name: "categories",
+    meta: { layout: "main" },
+    component: () => import("../views/Catergories.vue"),
   },
   {
-    path: '/history',
-    name: 'history',
-    meta: {layout: 'main'},
-    component: () => import('../views/History.vue')
+    path: "/detail",
+    name: "detail",
+    meta: { layout: "main" },
+    component: () => import("../views/DedailRecord.vue"),
   },
   {
-    path: '/planning',
-    name: 'planning',
-    meta: {layout: 'main'},
-    component: () => import('../views/Planning.vue')
+    path: "/history",
+    name: "history",
+    meta: { layout: "main" },
+    component: () => import("../views/History.vue"),
   },
   {
-    path: '/profile',
-    name: 'profile',
-    meta: {layout: 'main'},
-    component: () => import('../views/Profile.vue')
+    path: "/planning",
+    name: "planning",
+    meta: { layout: "main" },
+    component: () => import("../views/Planning.vue"),
   },
   {
-    path: '/record',
-    name: 'record',
-    meta: {layout: 'main'},
-    component: () => import('../views/Record.vue')
+    path: "/profile",
+    name: "profile",
+    meta: { layout: "main" },
+    component: () => import("../views/Profile.vue"),
   },
   {
-    path: '/register',
-    name: 'register',
-    meta: {layout: 'empty'},
-    component: () => import('../views/Register.vue')
-  }
-]
+    path: "/record",
+    name: "record",
+    meta: { layout: "main" },
+    component: () => import("../views/Record.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
