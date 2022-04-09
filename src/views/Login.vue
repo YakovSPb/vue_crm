@@ -42,7 +42,9 @@
         <small
           v-else-if="v$.password.$dirty && v$.password.minLength.$invalid"
           class="helper-text invalid"
-          >Пароль должен быть {{v$.password.minLength.$params.min}} симвоволов. Сейчас он {{password.length}}</small
+          >Пароль должен быть
+          {{ v$.password.minLength.$params.min }} симвоволов. Сейчас он
+          {{ password.length }}</small
         >
       </div>
     </div>
@@ -65,12 +67,14 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { email, required, minLength } from "@vuelidate/validators";
-import messages from '../utils/messages'
+import messages from "../utils/messages";
+import { useStore } from "vuex";
 
 export default {
-  name: 'login',
+  name: "login",
   setup() {
-    return { v$: useVuelidate() };
+    const store = useStore();
+    return { v$: useVuelidate(), store };
   },
   data() {
     return {
@@ -85,24 +89,26 @@ export default {
     };
   },
   mounted() {
-    const msg = messages[this.$route.query.message]
-    if(msg){
-      this.$message(msg)
+    const msg = messages[this.$route.query.message];
+    if (msg) {
+      this.$message(msg);
     }
   },
   methods: {
-    submitHadler() {
+    async submitHadler() {
       if (this.v$.$invalid) {
         this.v$.$touch();
         return;
       }
       const formData = {
         email: this.email,
-        password: this.password
-      }
+        password: this.password,
+      };
 
-      console.log(formData)
-      this.$router.push("/");
+      try {
+        await this.$store.dispatch("login", formData);
+        this.$router.push("/");
+      } catch (e) {}
     },
   },
 };
