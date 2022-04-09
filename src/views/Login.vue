@@ -65,8 +65,10 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { email, required, minLength } from "@vuelidate/validators";
+import messages from '../utils/messages'
 
 export default {
+  name: 'login',
   setup() {
     return { v$: useVuelidate() };
   },
@@ -81,6 +83,12 @@ export default {
       email: { required, email },
       password: { required, minLength: minLength(6) },
     };
+  },
+  mounted() {
+    const msg = messages[this.$route.query.message]
+    if(msg){
+      this.$message(msg)
+    }
   },
   methods: {
     submitHadler() {
