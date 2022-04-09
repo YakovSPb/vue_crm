@@ -3,10 +3,20 @@ import auth from './auth'
 
 export default createStore({
   state: {
-  },
-  getters: {
+    error: null
   },
   mutations: {
+    setError(state, error) {
+      state.error = error
+    },
+    clearError(state) {
+      state.error = null
+    }
+  },
+  getters: {
+    error(state) {
+      return state.error
+    }
   },
   actions: {
   },

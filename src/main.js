@@ -18,6 +18,7 @@ firebase.initializeApp({
   projectId: "crm-vue-b01c1",
   storageBucket: "crm-vue-b01c1.appspot.com",
   messagingSenderId: "509891980656",
+  databaseURL: "https://crm-vue-b01c1-default-rtdb.europe-west1.firebasedatabase.app",
   appId: "1:509891980656:web:0e4ca39115e73f492633b5",
   measurementId: "G-Y1Y90T14VB"
 });

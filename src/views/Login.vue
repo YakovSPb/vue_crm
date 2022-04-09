@@ -68,13 +68,11 @@
 import useVuelidate from "@vuelidate/core";
 import { email, required, minLength } from "@vuelidate/validators";
 import messages from "../utils/messages";
-import { useStore } from "vuex";
 
 export default {
   name: "login",
   setup() {
-    const store = useStore();
-    return { v$: useVuelidate(), store };
+    return { v$: useVuelidate() };
   },
   data() {
     return {
@@ -104,7 +102,6 @@ export default {
         email: this.email,
         password: this.password,
       };
-
       try {
         await this.$store.dispatch("login", formData);
         this.$router.push("/");
