@@ -7,19 +7,43 @@
           id="email"
           type="text"
           v-model.trim="email"
-          :class="{
-            invalid:
-              (v$.email.$dirty && !v$.email.required) ||
-              (v$.email.$dirty && !v$.email.email),
-          }"
+          :class="{ invalid: v$.email.$error }"
         />
         <label for="email">Email</label>
-        <small class="helper-text invalid">Email</small>
+        <small
+          v-if="v$.email.$dirty && v$.email.required.$invalid"
+          class="helper-text invalid"
+          >Поле Email не должно быть пустым</small
+        >
+        <small
+          v-else-if="v$.email.$dirty && v$.email.email.$invalid"
+          class="helper-text invalid"
+          >Введите корректный Email</small
+        >
       </div>
       <div class="input-field">
-        <input id="password" type="password" class="validate" />
+        <input
+          id="password"
+          type="password"
+          class="validate"
+          v-model="password"
+          :class="{
+            invalid:
+              (v$.password.$dirty && v$.password.required.$invalid) ||
+              (v$.password.$dirty && v$.password.minLength.$invalid),
+          }"
+        />
         <label for="password">Пароль</label>
-        <small class="helper-text invalid">Password</small>
+        <small
+          v-if="v$.password.$dirty && v$.password.required.$invalid"
+          class="helper-text invalid"
+          >Пароль не должно быть пустым</small
+        >
+        <small
+          v-else-if="v$.password.$dirty && v$.password.minLength.$invalid"
+          class="helper-text invalid"
+          >Пароль должен быть {{v$.password.minLength.$params.min}} симвоволов. Сейчас он {{password.length}}</small
+        >
       </div>
     </div>
     <div class="card-action">
@@ -39,35 +63,39 @@
 </template>
 
 <script>
-import useVuelidate from '@vuelidate/core'
-import {email, required, minLength} from '@vuelidate/validators'
+import useVuelidate from "@vuelidate/core";
+import { email, required, minLength } from "@vuelidate/validators";
 
 export default {
-    name: 'login',
-  setup () {
-    return { v$: useVuelidate() }
+  setup() {
+    return { v$: useVuelidate() };
   },
-  data () {
+  data() {
     return {
-      email: '',
-      password: '',
-    }
+      email: "",
+      password: "",
+    };
   },
-  validations () {
+  validations() {
     return {
-      email: { required, email }, // Matches this.firstName
-      password: { required }, // Matches this.lastName
-    }
+      email: { required, email },
+      password: { required, minLength: minLength(6) },
+    };
   },
-    methods: {
-    submitHadler () {
-      if(this.$v.$invalid) {
-        this.$v.$touch()
-        return
+  methods: {
+    submitHadler() {
+      if (this.v$.$invalid) {
+        this.v$.$touch();
+        return;
       }
-      this.$router.push('/')
-    }
-  }
-}
+      const formData = {
+        email: this.email,
+        password: this.password
+      }
 
+      console.log(formData)
+      this.$router.push("/");
+    },
+  },
+};
 </script>
