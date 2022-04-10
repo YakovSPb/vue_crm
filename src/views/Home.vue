@@ -7,7 +7,6 @@
         <i class="material-icons">refresh</i>
       </button>
     </div>
-
     <Loader v-if="loading" />
     <div v-else class="row">
       <HomeBill :rates="currency.rates" />
